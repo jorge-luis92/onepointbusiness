@@ -178,7 +178,7 @@
       <!-- Footer -->
       <footer class="container-fluid text-center" style="background-color: #E8C6E9; ">
                 <div >
-          <p style="color: black; font-size: 15px;" >Av. Central Manzana 3 32 Oaxaca(68200), Villa De Etla - Tels: 9514977069 </br>Copyright &copy; <a style="color: black">Sheila Paola Bohorges Vargas</a> <?php $anio= date("Y"); echo $anio?>. Todos los derechos reservados.</p>
+          <p style="color: black; font-size: 15px;" >Av. Central Manzana 3 32 Oaxaca(68200), Villa De Etla - Tels: 9513825715 </br>Copyright &copy; <a style="color: black">Sheila Paola Bohorges Vargas</a> <?php $anio= date("Y"); echo $anio?>. Todos los derechos reservados.</p>
       </div>
           </footer>
 
