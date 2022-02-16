@@ -13,7 +13,7 @@
                <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm" >
                    <div class="container" >
                        <a class="navbar-brand">
-                           Nueva venta
+                           Nueva ventas
                        </a>
                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#frutals" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                            <span class="navbar-toggler-icon"></span>
@@ -31,7 +31,7 @@
                              <a class="nav-link" id="messages-tab" data-toggle="tab" href="#messages" role="tab" aria-controls="messages" aria-selected="false">Ventas del día</a>
                            </li>
     -->                       <li class="nav-item" role="presentation">
-   <a class="nav-link" id="settings-tab" data-toggle="tab" href="#settings" role="tab" aria-controls="settings" aria-selected="false">Productos</a>
+   <a class="nav-link" id="settings-tab" data-toggle="tab" href="#settings" role="tab" aria-controls="settings" aria-selected="false">Impresiones</a>
  </li>
 
 
@@ -184,29 +184,80 @@
 </div><!-- termina el primero-->
 
 
-  <!-- termina el segundo-->
+  <!-- empieza el segundo-->
 <!--
 
 -->
                <div class="tab-pane" id="settings" role="tabpanel" aria-labelledby="settings-tab">
+</br>
+<div class="format">
+                 <div class="form-group row">
 
-                 <div class="table-responsive">
-     <table class="table table-bordered table-striped" style="color: #000000;" id="productos_table_todos">
-       <thead>
-         <tr>
-             <th scope="col">Nombre</th>
-             <th scope="col" >Unidad de Venta</th>
-             <th scope="col">Tipo</th>
-              <th scope="col" >Precio</th>
-              <th scope="col" >Disponible para Vender</th>
-         </tr>
-       </thead>
-       <tbody>
+                     <label for="impresiones_cantidad" class="col-md-4 col-form-label text-md-right">{{ __('Total de venta: ') }}</label>
 
-     </tbody>
-   </table>
- </div>
+                     <div class="col-md-3">
+                         <input id="impresiones_cantidad" placeholder="$" type="tel" maxlength="5" onkeypress="return numeros (event)"  class="form-control @error('impresiones_cantidad') is-invalid @enderror" name="impresiones_cantidad" value="{{ old('impresiones_cantidad') }}" required autocomplete="impresiones_cantidad" autofocus>
+
+                         @error('impresiones_cantidad')
+                             <span class="invalid-feedback" role="alert">
+                                 <strong>{{ $message }}</strong>
+                             </span>
+                         @enderror
+                     </div>
+                     &nbsp;&nbsp;&nbsp;
+
+
+
+  <button type="submit" id="ok_venta_impresiones" class="btn btn-dark">OK</button>
+  </div>
+                 </div>
+
+                 <hr class="sidebar-divider" style=" background-color: #FFFFFF;">
+               </br>
+               <hr class="sidebar-divider" style=" background-color: #FFFFFF;">
+<div class="col-md-12">
+  <a style="size: 1.0;">
+    <strong>Total de venta impresiones: $ <label id="total_especifico_impresiones" name="total_especifico_impresiones"> </label> </strong>
+</br>
+<form id="busqueda_impresiones">
+</br>
+<div class="form-group row">
+       <strong>  <label for="name" class="col-md-12 col-form-label text-md-right">{{ __('Seleccione una fecha') }}</label> </strong>
+
+         <div class="col-md-3">
+           <input id="fecha_inicio_impresiones" type="date"  max=""  value="" class="form-control @error('fecha_inicio') is-invalid @enderror" name="fecha_inicio_impresiones" required>
+     </div>
+<button id="primerarespuesta"  class="btn btn-danger" >
+       <span>
+   <i class="fa fa-search" > Buscar</i></span>
+ </button>
+&nbsp;
+&nbsp;
+     </div>
+</form>
+                 <div class="card">
+                    <div class="tab-content">
+                                      <div class="table-responsive">
+                                        <table class="table table-bordered table-striped" style="color: #000000;" id="total_impresiones_realizadas">
+                                          <thead>
+                                            <tr>
+                                               <th scope="col">Fecha</th>
+                                                <th scope="col">Total</th>
+                                            </tr>
+                                          </thead>
+                                        <tbody id="impresiones_fecha">
+
+                 </tbody>
+                 </table>
+                 </div>
+                                </div>
+                         </div>
+                       </div>
                </div>
+             </br>
+           </br>
+               <!-- termina el segundo-->
+             <!--
              </div>
              </div>
            </div>

@@ -454,8 +454,6 @@ alert("No hay nada que vender");
 //      alert("Venta concretada");
 document.getElementById('alrt').innerHTML='<b>¡La venta se ha realizado correctamente!';
 setTimeout(function() {document.getElementById('alrt').innerHTML='';},2000);
-
-
 }
 });
 }
@@ -551,6 +549,32 @@ $("#ganancia_especifico").html(sumasdeganancias);
 });
     });
 
+    $(document).on("click", "#ok_venta_impresiones", function(){
+      let can=0;
+      let impresiones_total = document.getElementById('impresiones_cantidad').value;
+      if(impresiones_total == '' ){
+        alert("Ingrese cantidad");
+      }
+      else{
+        console.log(impresiones_total);
+      let respuesta = confirm("¿Está seguro de concretar la venta?");
+   if (respuesta) {
+     $.ajax({
+   headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+   type: "POST",
+   url: "/realizarventa_impresiones",
+   datatype:"json",
+   data:  {total_impresiones: impresiones_total},
+   success: function(data) {
+   window.location.assign("venta_nueva");
+   document.getElementById('alrt').innerHTML='<b>¡La venta se ha realizado correctamente!';
+   setTimeout(function() {document.getElementById('alrt').innerHTML='';},2000);
+   }
+   });
+   }
+}
+   });
+
     $('#gramosa').on('shown.bs.modal', function () {
            $('#cantidad_gram').focus();
     })
@@ -579,5 +603,36 @@ $("#ganancia_especifico").html(sumasdeganancias);
             // Do something
         }
     });
+
+    $('#busqueda_impresiones').submit(function(e){
+          e.preventDefault(); //evita el comportambiento normal del submit, es decir, recarga total de la página
+  sumasdedatos=0;
+  let id= 3;
+  let fecha = document.getElementById("fecha_inicio_impresiones").value;
+  $.ajax({
+   //   headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+      type: "get",
+      url: "/busqueda_impresiones_fecha/"+fecha,
+      datatype: 'json',
+      success : function(respuesta) {
+   $("#impresiones_fecha tr").remove();
+  sumasdedatos = parseFloat(sumasdedatos);
+  respuesta.data.forEach(item => {
+  sumasdedatos+= parseFloat(item["total_impresiones"]);
+  let fila = `<tr>
+            <td id= "fecha_impresiones"scope="row">${item["created_at"]}</td>
+            <td id="totaldeimpresiones" scope="row">${item["total_impresiones"]}</td>
+                  </tr>`;
+                      $("#impresiones_fecha").append(fila);
+  })
+
+  sumasdedatos=sumasdedatos.toFixed(2);
+  $("#total_especifico_impresiones").html(sumasdedatos);
+    },
+      error : function(xhr, status) {
+          alert('Disculpe, existió un problema');
+        }
+  });
+      });
 
 });

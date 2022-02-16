@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use App\Models\Detailsale;
 use App\Models\Sale;
+use App\Models\Impresions;
 use Log;
 use Yajra\DataTables\DataTables;
 use Carbon\carbon;
@@ -257,19 +258,7 @@ if($type == 'General'){
   ->editColumn('created_at', function(Detailsale $ganancia){
     return $ganancia->created_at->format('d-m-Y h:i A');
   })
-  /*->editColumn('cantidad_vendida', function(Detailsale $gan2){
-  $nombre = $gan2->produto;
-    $periodo_semestre = DB::table('products')
-  ->select('products.unidad_venta')
-  ->where('products.nombre', $nombre)
-  ->take(1)
-  ->first();
-  $periodo_semestre= $periodo_semestre->unidad_venta;
-    $umm= $gan2->cantidad_vendida.' '.$periodo_semestre;
-    return $umm;
-  })*/
   ->toJson();
-
 }
 if($type == 'Fruta'){
             $datos_ventas= DB::table('detailsales')
@@ -301,17 +290,6 @@ else {
                    ->editColumn('created_at', function(Detailsale $ganancia){
                      return $ganancia->created_at->format('d-m-Y h:i A');
                    })
-                /*   ->editColumn('cantidad_vendida', function(Detailsale $gan2){
-                   $nombre = $gan2->produto;
-                     $periodo_semestre = DB::table('products')
-                   ->select('products.unidad_venta')
-                   ->where('products.nombre', $nombre)
-                   ->take(1)
-                   ->first();
-                   $periodo_semestre= $periodo_semestre->unidad_venta;
-                     $umm= $gan2->cantidad_vendida.' '.$periodo_semestre;
-                     return $umm;
-                   })*/
                    ->toJson();
 }
 }
@@ -379,6 +357,32 @@ $id= $usuario_actual->id;
  $ganas = round($ganas,2);
  //Log::info($users);
           return view('ventas.venta_extraoficial', ['producto' => $frutas, 'pago' => $users, 'ganacias_dia' => $ganas]);
+}
+
+public function datosenviados_impresiones(Request $request){
+  $datos= $request;
+  $date = Carbon::now();
+  $date = $date->format('Y-m-d');
+
+  $total_de_venta = $datos['total_impresiones'];
+  $sale_id =  Impresions::create([
+      'total_impresiones' => $total_de_venta,
+      'creacion_impresiones' => $date,
+  ]);
+
+}
+
+public function busqueda_dia_impresiones($req){
+  $date=$req;
+Log::info($date);
+  return Datatables::of(Impresions::select('impresions.total_impresiones', 'impresions.created_at')
+  ->whereDate('impresions.created_at', $date))
+  ->editColumn('created_at', function(Impresions $fecha){
+    return $fecha->created_at->format('d-m-Y h:i A');
+  })
+  ->toJson();
+
+
 }
 
 }

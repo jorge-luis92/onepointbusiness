@@ -93,6 +93,12 @@
       <div class="sidebar-heading" style="color: #FFFFFF">
        Utilidades
       </div>
+        <li class="nav-item">
+        <a class="nav-link"  href="ventas_extraoficial" aria-expanded="true">
+        <i class="fas fa-fw fa-cash-register"></i> <span style="font-size: 0.9em;">Venta Familiar</span> </a>
+        </li>
+
+
       <li class="nav-item" >
               <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#registar_talleritas" aria-expanded="true" aria-controls="collapseTwo">
                 <i class="fa fa-list" aria-hidden="true"></i></i><span style="font-size: 0.9em;">&nbsp;Reportes</span>
@@ -108,13 +114,7 @@
       <!-- Nav Item - Pages Collapse Menu -->
 
 
-      <div class="text-center d-none d-md-inline">
-        <li class="nav-item">
-        <a class="nav-link"  href="ventas_extraoficial" aria-expanded="true">
-        <i class="fas fa-fw fa-cash-register"></i> <span style="font-size: 0.9em;">Venta Familiar</span> </a>
-        </li>
 
-      </div>
   <!--    <div class="text-center d-none d-md-inline">
         <li class="nav-item">
         <a class="nav-link"  href="venta_nueva" aria-expanded="true">

@@ -94,6 +94,8 @@ Route::get('ventas_extraoficial', 'VentasController@ventas_extra')->name('ventas
 Route::get('venta_nueva', 'VentasController@ventas_pro')->name('venta_nueva');
 Route::get('dataproductstables_pro','ProductoController@prod_prom_data')->name('dataproductstables_pro');
 Route::post('addpromos','ProductoController@setaddpromo')->name('addpromos');
+Route::post('realizarventa_impresiones', 'VentasController@datosenviados_impresiones')->name('realizarventa_impresiones');
+Route::get('busqueda_impresiones_fecha/{fecha}', 'VentasController@busqueda_dia_impresiones');
 });
 
 Auth::routes(['verify' => true]);
